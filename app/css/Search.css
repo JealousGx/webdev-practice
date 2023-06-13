@@ -1,0 +1,29 @@
+.search__container {
+  max-width: 570px;
+  width: 100%;
+  background-color: var(--background-color-light);
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  border-radius: 12px;
+}
+
+.search__container input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  padding: 17px 13px;
+  padding-left: 0;
+  font-size: 17px;
+  color: var(--text-secondary);
+}
+
+.search__container input::placeholder {
+  color: var(--text-secondary);
+}
+
+.search__container svg {
+  fill: var(--text-secondary);
+  padding-left: 13px;
+}
