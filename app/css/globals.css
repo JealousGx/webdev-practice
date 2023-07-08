@@ -2,9 +2,15 @@
   --text-color: #124a63;
   --text-secondary: #b3c5cd;
 
+  --heading-color: #333;
+
   --primary-color: #21b6b7;
 
-  --background-color: #f9f9f9;
+  --border-color: #e0e0e0;
+
+  --black-color: #000;
+
+  --background-color: #f6f6f6;
   --background-color-light: #eef3f6;
   --background-color-dark: white;
 
@@ -34,6 +40,18 @@ body {
   width: 100%;
   padding: 0 var(--side-padding);
   margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span {
+  margin: 0;
 }
 
 header {
@@ -74,6 +92,68 @@ header {
   font-size: 16px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.country {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--background-color-dark);
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  padding: 15px 12px;
+  box-shadow: var(--box-shadow);
+  transition: all 0.2s ease-in-out;
+}
+
+.label__name,
+.label__population,
+.label__area,
+.label__gini {
+  margin-top: 0;
+  cursor: pointer;
+}
+
+.country__flag {
+  margin-right: 25px;
+  border-radius: 4px;
+}
+
+.country__name,
+.country__population,
+.country__area,
+.country__gini {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 200%;
+  margin: 0;
+  flex: 1;
+}
+
+.country__area,
+.country__gini {
+  text-align: center;
+}
+
+@media (hover: hover) {
+  .country:hover {
+    scale: 1.035;
+  }
+}
+
+@media (max-width: 638px) {
+  .label__area,
+  .label__gini,
+  .country__flag,
+  .country__area,
+  .country__gini {
+    display: none !important;
+  }
 }
