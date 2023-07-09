@@ -7,6 +7,7 @@
   --primary-color: #21b6b7;
 
   --border-color: #e0e0e0;
+  --gray-color: #f2f5f7;
 
   --black-color: #000;
 
@@ -87,6 +88,65 @@ header {
   }
 }
 
+.loading__container {
+  margin-top: 35px;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loading__bar {
+  width: 4px;
+  height: 18px;
+  margin: 0 2px;
+  background-color: var(--primary-color);
+  animation: loading 1s ease-in-out infinite;
+}
+
+.loading__bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loading__bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.loading__bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.loading__bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.loading__bar:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.loading__bar:nth-child(6) {
+  animation-delay: 0.5s;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1, 2.5);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+.no__countries {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .labels__container {
   font-weight: 500;
   font-size: 16px;
@@ -110,6 +170,7 @@ header {
   padding: 15px 12px;
   box-shadow: var(--box-shadow);
   transition: all 0.2s ease-in-out;
+  z-index: 10;
 }
 
 .label__name,
@@ -137,23 +198,52 @@ header {
   flex: 1;
 }
 
-.country__area,
-.country__gini {
+.country__area {
   text-align: center;
+}
+
+.country__gini {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.gini__bar {
+  background-color: var(--gray-color);
+  height: 6px;
+  width: 133px;
+  border-radius: 4px;
+  position: relative;
+}
+
+.gini__bar > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: var(--primary-color);
+  border-radius: 4px;
 }
 
 @media (hover: hover) {
   .country:hover {
-    scale: 1.035;
+    scale: 1.01;
   }
 }
 
 @media (max-width: 638px) {
   .label__area,
   .label__gini,
-  .country__flag,
   .country__area,
   .country__gini {
     display: none !important;
+  }
+
+  .country__name {
+    margin-left: 15px;
+  }
+
+  .country__population {
+    text-align: center;
   }
 }

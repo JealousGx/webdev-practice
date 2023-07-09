@@ -16,6 +16,9 @@ export const sortCountriesByValue = (
   value: string
 ): any => {
   // sort by name
+
+  if (sort === null) return sortCountriesByValue(countries, "asc", "name");
+
   if (value === "name") {
     if (sort === "asc") {
       return countries.sort((a: any, b: any) => {
@@ -41,27 +44,29 @@ export const sortCountriesByValue = (
   } else if (value === "gini") {
     if (sort === "asc") {
       return countries.sort((a: any, b: any) => {
-        if (Object.values(a.gini) < Object.values(b.gini)) {
+        const aGini: any = a.gini ? Object.values(a.gini)[0] : 0;
+        const bGini: any = b.gini ? Object.values(b.gini)[0] : 0;
+        if (aGini < bGini) {
           return -1;
         }
-        if (Object.values(a.gini) > Object.values(b.gini)) {
+        if (aGini > bGini) {
           return 1;
         }
         return 0;
       });
     }
     return countries.sort((a: any, b: any) => {
-      if (Object.values(a.gini) > Object.values(b.gini)) {
+      const aGini: any = a.gini ? Object.values(a.gini)[0] : 0;
+      const bGini: any = b.gini ? Object.values(b.gini)[0] : 0;
+      if (aGini > bGini) {
         return -1;
       }
-      if (Object.values(a.gini) < Object.values(b.gini)) {
+      if (aGini < bGini) {
         return 1;
       }
       return 0;
     });
-  } else if (sort === null)
-    return sortCountriesByValue(countries, "asc", "name");
-  else {
+  } else {
     if (sort === "asc") {
       return countries.sort((a: any, b: any) => {
         if (a[value] < b[value]) {

@@ -11,12 +11,14 @@ const Country = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const [country, setCountry] = useState<any>({});
   const [neighbouringCountries, setNeighbouringCountries] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const getCountry = async () => {
       if (slug) {
         const countryData = await getCountryByCode(slug as string);
         setCountry(countryData[0]);
+        setLoading(false);
       }
     };
     getCountry();
@@ -46,9 +48,19 @@ const Country = ({ params }: { params: { slug: string } }) => {
     getNeighbourCountries();
   }, [slug, country]);
 
-  if (Object.keys(country).length === 0) {
-    return <div>Loading...</div>;
-  }
+  if (loading)
+    return (
+      <div className="loading__container">
+        <div className="loading__bar"></div>
+        <div className="loading__bar"></div>
+        <div className="loading__bar"></div>
+        <div className="loading__bar"></div>
+        <div className="loading__bar"></div>
+        <div className="loading__bar"></div>
+      </div>
+    );
+
+  if (Object.keys(country).length === 0) return <div>Country not found!</div>;
 
   return (
     <React.Fragment>
@@ -56,10 +68,10 @@ const Country = ({ params }: { params: { slug: string } }) => {
         <div className="flag">
           <Image
             src={country.flags.svg}
-            alt={country.flags.alt}
+            alt={country.flags.alt || country.name.common}
             width={150}
             height={155}
-            loading="lazy"
+            priority
           />
 
           <h3>{country.name.common}</h3>
@@ -74,7 +86,9 @@ const Country = ({ params }: { params: { slug: string } }) => {
 
             <p>
               {country.area.toLocaleString("en")}
-              <span>Area (km sq.)</span>
+              <span>
+                Area (km <sup style={{ fontSize: "12px" }}>2</sup>)
+              </span>
             </p>
           </div>
         </div>
@@ -119,7 +133,17 @@ const Country = ({ params }: { params: { slug: string } }) => {
           {country.gini && (
             <p>
               <span>Gini: </span>
-              {[...Object.values(country.gini)].map((gini: any) => gini)}%
+              <div className="gini__bar">
+                <div
+                  className="gini__bar--fill"
+                  style={{
+                    width: `${country.gini ? Object.values(country.gini) : 0}%`,
+                  }}
+                ></div>
+                <span className="gini__value">
+                  {[...Object.values(country.gini)].map((gini: any) => gini)}%
+                </span>
+              </div>
             </p>
           )}
 
@@ -136,9 +160,13 @@ const Country = ({ params }: { params: { slug: string } }) => {
                   >
                     <Image
                       src={neighbourCountry.flags.svg}
-                      alt={neighbourCountry.flags.alt}
+                      alt={
+                        neighbourCountry.flags.alt ||
+                        neighbourCountry.name.common
+                      }
                       width={78}
                       height={60}
+                      priority
                     />
 
                     <h6>{neighbourCountry.name.common}</h6>

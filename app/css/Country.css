@@ -126,6 +126,7 @@
 
 .neighbouring_country {
   text-decoration: none;
+  transition: all 0.2s ease-in-out;
 }
 
 .neighbouring_country img {
@@ -138,6 +139,26 @@
   font-weight: 400;
   line-height: 200%;
   color: var(--text-color);
+  text-align: center;
+}
+
+.gini__bar {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+}
+
+.gini__bar .gini__value {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+@media (hover: hover) {
+  .neighbouring_country:hover {
+    transform: translateY(-5px);
+  }
 }
 
 @media (max-width: 638px) {
